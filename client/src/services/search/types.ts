@@ -8,6 +8,8 @@ export type DatePosted = 'past_24h' | 'past_week' | 'past_month' | 'any';
 
 export type SearchCategory = 'jobs' | 'posts' | 'people' | 'companies' | 'events' | 'courses' | 'all';
 
+export type SearchMode = 'smart' | 'boolean';
+
 export interface EducationCriteria {
   includeInQuery?: boolean;
   level?: string;
@@ -34,6 +36,11 @@ export interface SearchCriteria {
   under10Applicants?: boolean;
   inMyNetwork?: boolean;
   education?: EducationCriteria;
+  searchMode?: SearchMode;
+  useSynonyms?: boolean;
+  synonyms?: string[];
+  excludeSeniorRoles?: boolean;
+  customExclusions?: string[];
 }
 
 export interface OptimizedSearchResult {
@@ -43,6 +50,17 @@ export interface OptimizedSearchResult {
   url: string;
   queryUsed: string;
   appliedFiltersSummary: string[];
+  explanation?: string;
+}
+
+export interface SearchPack {
+  jobs: OptimizedSearchResult;
+  posts: OptimizedSearchResult;
+  people: OptimizedSearchResult;
+  companies: OptimizedSearchResult;
+  events: OptimizedSearchResult;
+  courses: OptimizedSearchResult;
+  explanation: string;
 }
 
 export interface SavedSearchItem {
