@@ -1,17 +1,21 @@
-import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AppRoutes } from './routes/AppRoutes';
 import { AuthProvider } from './context/AuthContext';
 
-export const App: React.FC = () => {
+const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'dummy-client-id';
+
+export const App = () => {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <div className="app-container">
-          <AppRoutes />
-        </div>
-      </AuthProvider>
-    </BrowserRouter>
+    <GoogleOAuthProvider clientId={googleClientId}>
+      <BrowserRouter>
+        <AuthProvider>
+          <div className="app-container">
+            <AppRoutes />
+          </div>
+        </AuthProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 };
 

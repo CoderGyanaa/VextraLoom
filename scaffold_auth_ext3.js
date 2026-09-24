@@ -1,4 +1,9 @@
+const fs = require('fs');
+const path = require('path');
 
+const srcDir = path.join(__dirname, 'server', 'src');
+
+fs.writeFileSync(path.join(srcDir, 'controllers', 'auth.controller.ts'), `
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { authService } from '../services/auth.service';
@@ -88,3 +93,28 @@ export const googleSignIn = asyncHandler(async (req: Request, res: Response) => 
   setTokenCookie(res, refreshToken);
   res.status(200).json({ success: true, data: { user, accessToken } });
 });
+`);
+
+fs.writeFileSync(path.join(srcDir, 'routes', 'auth.routes.ts'), `
+import { Router } from 'express';
+import { register, login, refresh, logout, getMe, forgotPassword, resetPassword, googleSignIn } from '../controllers/auth.controller';
+import { validate } from '../middleware/validate.middleware';
+import { registerSchema, loginSchema, forgotPasswordSchema, resetPasswordSchema, googleSignInSchema } from '../validators/auth.validator';
+import { protect } from '../middleware/auth.middleware';
+import { authLimiter } from '../middleware/rateLimiter';
+
+const router = Router();
+
+router.post('/register', authLimiter, validate(registerSchema), register);
+router.post('/login', authLimiter, validate(loginSchema), login);
+router.post('/refresh', refresh);
+router.post('/logout', logout);
+router.get('/me', protect, getMe);
+
+// Extensions
+router.post('/forgot-password', authLimiter, validate(forgotPasswordSchema), forgotPassword);
+router.post('/reset-password', authLimiter, validate(resetPasswordSchema), resetPassword);
+router.post('/google', authLimiter, validate(googleSignInSchema), googleSignIn);
+
+export default router;
+`);

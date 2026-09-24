@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { GoogleAuthButton } from '../components/GoogleAuthButton';
 
 export const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -33,6 +34,9 @@ export const RegisterPage = () => {
           Register
         </button>
       </form>
+      <div style={{ marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
+        <GoogleAuthButton />
+      </div>
     </div>
   );
 };

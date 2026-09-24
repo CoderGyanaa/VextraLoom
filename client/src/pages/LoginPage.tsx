@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { GoogleAuthButton } from '../components/GoogleAuthButton';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -48,6 +49,12 @@ export const LoginPage = () => {
           Login
         </button>
       </form>
+      <div style={{ marginTop: '15px', textAlign: 'center' }}>
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </div>
+      <div style={{ marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
+        <GoogleAuthButton />
+      </div>
     </div>
   );
 };

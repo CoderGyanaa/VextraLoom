@@ -1,8 +1,8 @@
 
 import { Router } from 'express';
-import { register, login, refresh, logout, getMe } from '../controllers/auth.controller';
+import { register, login, refresh, logout, getMe, forgotPassword, resetPassword, googleSignIn } from '../controllers/auth.controller';
 import { validate } from '../middleware/validate.middleware';
-import { registerSchema, loginSchema } from '../validators/auth.validator';
+import { registerSchema, loginSchema, forgotPasswordSchema, resetPasswordSchema, googleSignInSchema } from '../validators/auth.validator';
 import { protect } from '../middleware/auth.middleware';
 import { authLimiter } from '../middleware/rateLimiter';
 
@@ -13,5 +13,10 @@ router.post('/login', authLimiter, validate(loginSchema), login);
 router.post('/refresh', refresh);
 router.post('/logout', logout);
 router.get('/me', protect, getMe);
+
+// Extensions
+router.post('/forgot-password', authLimiter, validate(forgotPasswordSchema), forgotPassword);
+router.post('/reset-password', authLimiter, validate(resetPasswordSchema), resetPassword);
+router.post('/google', authLimiter, validate(googleSignInSchema), googleSignIn);
 
 export default router;
