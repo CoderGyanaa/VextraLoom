@@ -21,7 +21,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     code = 'DUPLICATE_ERROR';
   } else if (err.name === 'ZodError') {
     statusCode = 400;
-    message = err.errors.map((e: any) => `${e.path.join('.')}: ${e.message}`).join(', ');
+    message = err.errors?.map((e: any) => e.message).join(', ') || 'Validation failed'; //((e: any) => `${e.path.join('.')}: ${e.message}`).join(', ');
     code = 'VALIDATION_ERROR';
   }
 

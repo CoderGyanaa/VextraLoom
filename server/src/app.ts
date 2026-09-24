@@ -1,5 +1,6 @@
 import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { config } from './config/env';
 import apiRoutes from './routes/index';
 import { errorHandler } from './middleware/error.middleware';
@@ -13,6 +14,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Root info route
 app.get('/', (_req: Request, res: Response) => {

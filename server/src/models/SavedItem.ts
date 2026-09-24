@@ -4,5 +4,5 @@ const savedItemSchema = new Schema({
   itemModel: { type: String, required: true, enum: ['Job', 'Internship', 'Scholarship', 'Hackathon', 'Roadmap', 'Certification', 'Tool', 'Resource', 'Challenge', 'OpenSourceOpportunity'] },
   itemId: { type: Schema.Types.ObjectId, required: true, refPath: 'itemModel' }
 }, { timestamps: true });
-savedItemSchema.index({ user: 1, itemId: 1 }, { unique: true });
+savedItemSchema.index({ user: 1, itemModel: 1, itemId: 1 }, { unique: true });
 export const SavedItem = mongoose.model('SavedItem', savedItemSchema);
