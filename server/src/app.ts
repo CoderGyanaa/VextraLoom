@@ -1,7 +1,8 @@
-import express, { Application, Request, Response, NextFunction } from 'express';
+import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import { config } from './config/env';
-import healthRoutes from './routes/health.routes';
+import apiRoutes from './routes/index';
+import { errorHandler } from './middleware/error.middleware';
 
 const app: Application = express();
 
@@ -25,26 +26,22 @@ app.get('/', (_req: Request, res: Response) => {
   });
 });
 
-// Health check endpoints
-app.use('/health', healthRoutes);
-app.use('/api/v1/health', healthRoutes);
+// API Routes
+app.use('/api/v1', apiRoutes);
+
+// Legacy health check alias for easy probing
+app.use('/health', apiRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {
   res.status(404).json({
-    status: 'error',
-    message: `Endpoint ${req.method} ${req.originalUrl} not found.`
+    success: false,
+    message: `Endpoint ${req.method} ${req.originalUrl} not found.`,
+    error: { code: 'NOT_FOUND' }
   });
 });
 
 // Global Error Handler
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  console.error('[Server Error]:', err);
-  res.status(500).json({
-    status: 'error',
-    message: 'Internal server error occurred',
-    details: config.nodeEnv === 'development' ? err.message : undefined
-  });
-});
+app.use(errorHandler);
 
 export default app;
