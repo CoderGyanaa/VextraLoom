@@ -10,6 +10,7 @@ import { ProtectedRoute } from '../components/ProtectedRoute';
 import { AppShell } from '../components/layout/AppShell';
 
 import { DiscoverPage } from '../pages/DiscoverPage';
+import { LinkedInSearchPage } from '../pages/LinkedInSearchPage';
 
 export const AppRoutes = () => {
   return (
@@ -25,6 +26,7 @@ export const AppRoutes = () => {
       <Route element={<AppShell />}>
         {/* PUBLIC DISCOVERY & LEARNING ROUTES */}
         <Route path="/discover" element={<DiscoverPage />} />
+        <Route path="/linkedin-search" element={<LinkedInSearchPage />} />
         <Route path="/jobs" element={
           <div className="max-w-5xl mx-auto space-y-4">
             <h1 className="text-3xl font-bold tracking-tight">Jobs</h1>

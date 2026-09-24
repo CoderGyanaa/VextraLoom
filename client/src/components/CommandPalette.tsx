@@ -23,6 +23,7 @@ export const CommandPalette = () => {
   if (!isOpen) return null;
 
   const actions = [
+    { label: 'LinkedIn Optimized Search', icon: Search, path: '/linkedin-search' },
     { label: 'Discover Opportunities', icon: Compass, path: '/discover' },
     { label: 'View Career Roadmaps', icon: BookOpen, path: '/roadmaps' },
     { label: 'Interview Preparation', icon: Target, path: '/prepare' },
