@@ -2,6 +2,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AppRoutes } from './routes/AppRoutes';
 import { AuthProvider } from './context/AuthContext';
+import { AuthPromptProvider } from './context/AuthPromptContext';
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || 'dummy-client-id';
 
@@ -10,9 +11,11 @@ export const App = () => {
     <GoogleOAuthProvider clientId={googleClientId}>
       <BrowserRouter>
         <AuthProvider>
-          <div className="app-container">
-            <AppRoutes />
-          </div>
+          <AuthPromptProvider>
+            <div className="app-container">
+              <AppRoutes />
+            </div>
+          </AuthPromptProvider>
         </AuthProvider>
       </BrowserRouter>
     </GoogleOAuthProvider>
