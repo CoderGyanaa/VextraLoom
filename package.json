@@ -1,0 +1,16 @@
+{
+  "name": "vextraloom",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VEXTRALOOM - Premium Futuristic Career Operating System for Students (MERN)",
+  "scripts": {
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "build:server": "npm --prefix server run build",
+    "build:client": "npm --prefix client run build",
+    "build": "npm run build:server && npm run build:client"
+  },
+  "keywords": ["mern", "career-os", "react", "express", "mongodb", "typescript"],
+  "author": "CoderGyanaa",
+  "license": "UNLICENSED"
+}
