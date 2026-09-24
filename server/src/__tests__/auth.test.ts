@@ -57,7 +57,6 @@ describe('Authentication API', () => {
 
   it('3. invalid email', async () => {
     const res = await request(app).post('/api/v1/auth/register').send({ ...validRegisterData, email: 'notanemail' });
-    if (res.status === 500) console.log('500 ERROR BODY:', res.body);
     expect(res.status).toBe(400);
     expect(res.body.error.code).toBe('VALIDATION_ERROR');
   });
