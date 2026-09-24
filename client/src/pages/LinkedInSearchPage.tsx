@@ -60,7 +60,7 @@ export const LinkedInSearchPage: React.FC = () => {
     searchMode: 'smart',
     useSynonyms: true,
     synonyms: ['Java Developer', 'Java Backend Developer', 'Backend Developer'],
-    excludeSeniorRoles: true,
+    excludeSeniorRoles: false,
     customExclusions: SENIOR_EXCLUSION_TERMS,
     education: {
       includeInQuery: true,
@@ -107,6 +107,7 @@ export const LinkedInSearchPage: React.FC = () => {
         ...preset,
         searchMode: 'smart',
         useSynonyms: true,
+        excludeSeniorRoles: false,
         education: {
           ...prev.education,
           ...(preset.education || {})
