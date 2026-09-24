@@ -25,23 +25,28 @@ const navGroups: NavGroup[] = [
     ]
   },
   {
-    label: "LEARN & PREPARE (PUBLIC)",
+    label: "LEARN (PUBLIC)",
     items: [
-      { name: 'Roadmaps', icon: BookOpen, path: '/roadmaps' },
-      { name: 'Preparation', icon: Target, path: '/prepare' }
+      { name: 'Career Roadmaps', icon: BookOpen, path: '/roadmaps' }
+    ]
+  },
+  {
+    label: "PREPARE (PUBLIC)",
+    items: [
+      { name: 'Interview Prep & DSA', icon: Target, path: '/prepare' }
     ]
   },
   {
     label: "AI TOOLS (PUBLIC)",
     items: [
-      { name: 'HuntBuddy', icon: Sparkles, path: '/huntbuddy' }
+      { name: 'AI Tool Hub', icon: Sparkles, path: '/tools' }
     ]
   },
   {
     label: "PERSONAL WORKSPACE",
     items: [
       { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard', requiresAuth: true },
-      { name: 'Saved', icon: Bookmark, path: '/saved', requiresAuth: true },
+      { name: 'Saved Searches', icon: Bookmark, path: '/saved', requiresAuth: true },
       { name: 'Profile', icon: User, path: '/profile', requiresAuth: true }
     ]
   }
