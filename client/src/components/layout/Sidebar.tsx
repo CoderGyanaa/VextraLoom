@@ -52,16 +52,25 @@ const navGroups: NavGroup[] = [
   }
 ];
 
-export const Sidebar = () => {
+interface SidebarProps {
+  isMobileOpen?: boolean;
+  onCloseMobile?: () => void;
+}
+
+export const Sidebar = ({ isMobileOpen, onCloseMobile }: SidebarProps = {}) => {
   const { isAuthenticated, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  return (
-    <aside className="w-64 border-r border-border bg-background h-screen flex flex-col hidden md:flex sticky top-0">
+  const handleLinkClick = () => {
+    if (onCloseMobile) onCloseMobile();
+  };
+
+  const navContent = (
+    <>
       {/* Brand Header */}
       <div className="p-6">
-        <NavLink to="/" className="flex items-center gap-2 group">
+        <NavLink to="/" onClick={handleLinkClick} className="flex items-center gap-2 group">
           <div className="w-7 h-7 rounded bg-accent-primary flex items-center justify-center shadow-glow-primary group-hover:scale-105 transition-transform">
             <span className="text-background text-xs font-black">V</span>
           </div>
@@ -83,6 +92,7 @@ export const Sidebar = () => {
                 <li key={item.name}>
                   <NavLink
                     to={item.path}
+                    onClick={handleLinkClick}
                     className={({ isActive }) => cn(
                       "flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all relative overflow-hidden",
                       isActive 
@@ -106,7 +116,7 @@ export const Sidebar = () => {
       </div>
 
       {/* Guest or User Bottom Card */}
-      <div className="p-4 border-t border-border">
+      <div className="p-4 border-t border-border shrink-0">
         {!isAuthenticated ? (
           <div className="p-3.5 rounded-xl bg-surface border border-border">
             <div className="flex items-center gap-1.5 mb-1.5 text-xs font-semibold text-accent-primary">
@@ -120,14 +130,17 @@ export const Sidebar = () => {
               size="sm" 
               variant="outline" 
               className="w-full text-xs justify-center gap-1.5"
-              onClick={() => navigate('/login', { state: { from: location } })}
+              onClick={() => {
+                handleLinkClick();
+                navigate('/login', { state: { from: location } });
+              }}
             >
               Sign In <ArrowRight className="w-3 h-3" />
             </Button>
           </div>
         ) : (
           <div className="flex items-center gap-3 px-2 py-1">
-            <div className="w-8 h-8 rounded-full bg-surface-elevated border border-border flex items-center justify-center font-bold text-xs text-accent-primary">
+            <div className="w-8 h-8 rounded-full bg-surface-elevated border border-border flex items-center justify-center font-bold text-xs text-accent-primary shrink-0">
               {user?.name?.charAt(0) || 'U'}
             </div>
             <div className="flex-1 min-w-0">
@@ -137,6 +150,36 @@ export const Sidebar = () => {
           </div>
         )}
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="w-64 border-r border-border bg-background h-screen flex-col hidden md:flex sticky top-0 shrink-0">
+        {navContent}
+      </aside>
+
+      {/* Mobile Sidebar Overlay */}
+      {isMobileOpen && (
+        <div className="fixed inset-0 z-[100] flex md:hidden" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+          <div 
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-fade-in"
+            onClick={onCloseMobile}
+            aria-hidden="true"
+          />
+          <div className="relative w-72 max-w-[85%] h-full bg-background border-r border-border shadow-2xl flex flex-col animate-slide-right">
+            <button 
+              onClick={onCloseMobile}
+              className="absolute top-6 right-4 p-2 rounded-lg bg-surface hover:bg-surface-elevated text-text-muted hover:text-text-primary z-10 transition-colors"
+              aria-label="Close navigation"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            {navContent}
+          </div>
+        </div>
+      )}
+    </>
   );
 };

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { HomePage } from '../pages/HomePage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { LoginPage } from '../pages/LoginPage';
@@ -34,8 +34,10 @@ export const AppRoutes = () => {
         <Route path="/hackathons" element={<DiscoverPage />} />
         <Route path="/scholarships" element={<DiscoverPage />} />
         <Route path="/linkedin-search" element={<LinkedInSearchPage />} />
+        <Route path="/linkedin" element={<Navigate to="/linkedin-search" replace />} />
 
         {/* PUBLIC LEARN & CURRICULUM ROUTES */}
+        <Route path="/learn" element={<Navigate to="/roadmaps" replace />} />
         <Route path="/roadmaps" element={<LearnPage />} />
         <Route path="/certifications" element={<LearnPage />} />
 
