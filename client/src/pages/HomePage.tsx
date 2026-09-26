@@ -72,7 +72,7 @@ export const HomePage = () => {
             AI Tools
           </button>
           <button onClick={() => navigate('/linkedin-search')} className="hover:text-accent-primary transition-colors flex items-center gap-1">
-            <span>LinkedIn Optimizer</span>
+            <span>LinkedIn Search Hub</span>
             <span className="text-[10px] font-mono px-1 rounded bg-accent-primary/10 text-accent-primary">NEW</span>
           </button>
         </nav>

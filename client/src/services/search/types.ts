@@ -10,6 +10,13 @@ export type SearchCategory = 'jobs' | 'posts' | 'people' | 'companies' | 'events
 
 export type SearchMode = 'smart' | 'boolean';
 
+export interface QueryHealthItem {
+  id: string;
+  type: 'warning' | 'info';
+  message: string;
+  suggestion?: string;
+}
+
 export interface EducationCriteria {
   includeInQuery?: boolean;
   level?: string;
@@ -24,6 +31,8 @@ export interface SearchCriteria {
   role: string;
   roles?: string[];
   skills: string[];
+  coreSkills?: string[];
+  supportingSkills?: string[];
   keywords?: string;
   experience: ExperienceLevel;
   location: string;
@@ -31,6 +40,9 @@ export interface SearchCriteria {
   employmentType: EmploymentType;
   datePosted: DatePosted;
   company?: string;
+  targetCompanies?: string[];
+  salaryMin?: string;
+  salaryMax?: string;
   industry?: string;
   easyApplyOnly?: boolean;
   under10Applicants?: boolean;
@@ -46,6 +58,7 @@ export interface SearchCriteria {
 export interface OptimizedSearchResult {
   category: SearchCategory;
   label: string;
+  actionText?: string;
   description: string;
   url: string;
   queryUsed: string;

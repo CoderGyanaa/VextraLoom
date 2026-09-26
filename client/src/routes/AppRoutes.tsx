@@ -9,6 +9,7 @@ import { ResetPasswordPage } from '../pages/ResetPasswordPage';
 import { ProtectedRoute } from '../components/ProtectedRoute';
 import { AppShell } from '../components/layout/AppShell';
 
+import { UniversalSearchPage } from '../pages/UniversalSearchPage';
 import { DiscoverPage } from '../pages/DiscoverPage';
 import { LinkedInSearchPage } from '../pages/LinkedInSearchPage';
 import { LearnPage } from '../pages/LearnPage';
@@ -28,6 +29,7 @@ export const AppRoutes = () => {
       {/* Global Application Shell: Open to both Guests & Authenticated Users */}
       <Route element={<AppShell />}>
         {/* PUBLIC DISCOVERY ROUTES */}
+        <Route path="/search" element={<UniversalSearchPage />} />
         <Route path="/discover" element={<DiscoverPage />} />
         <Route path="/jobs" element={<DiscoverPage />} />
         <Route path="/internships" element={<DiscoverPage />} />

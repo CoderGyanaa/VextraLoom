@@ -144,7 +144,7 @@ export const DiscoverPage = () => {
             className="text-xs gap-1.5 border-accent-primary/50 text-accent-primary hover:bg-accent-primary/10"
             onClick={() => navigate('/linkedin-search')}
           >
-            <span>LinkedIn Optimizer</span>
+            <span>LinkedIn Search Hub</span>
             <ExternalLink className="w-3 h-3" />
           </Button>
           <Badge variant={isAuthenticated ? 'success' : 'outline'} className="text-xs">
@@ -195,7 +195,7 @@ export const DiscoverPage = () => {
               Try adjusting your search keywords, or use the LinkedIn Search Optimizer to discover fresh live postings.
             </p>
             <Button size="sm" variant="outline" onClick={() => navigate('/linkedin-search')}>
-              Launch LinkedIn Search Optimizer
+              Launch LinkedIn Search Hub
             </Button>
           </div>
         ) : (

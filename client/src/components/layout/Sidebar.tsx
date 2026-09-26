@@ -1,5 +1,5 @@
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { Compass, Search, BookOpen, Target, Sparkles, User, LayoutDashboard, Bookmark, ArrowRight, LucideIcon } from 'lucide-react';
+import { Compass, Search, BookOpen, Target, Sparkles, User, LayoutDashboard, Bookmark, ArrowRight, LucideIcon, Globe } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { cn } from '../../lib/utils';
 import { Button } from '../ui/Button';
@@ -20,8 +20,9 @@ const navGroups: NavGroup[] = [
   {
     label: "DISCOVER (PUBLIC)",
     items: [
+      { name: 'Universal Search', icon: Globe, path: '/search' },
       { name: 'Opportunities', icon: Compass, path: '/discover' },
-      { name: 'LinkedIn Optimizer', icon: Search, path: '/linkedin-search' }
+      { name: 'LinkedIn Search Hub', icon: Search, path: '/linkedin-search' }
     ]
   },
   {
